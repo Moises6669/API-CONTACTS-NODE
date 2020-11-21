@@ -16,11 +16,16 @@ User.init({
     password:{
         type:DataTypes.STRING,
         allowNull:false
+    },
+    img:{
+        type: DataTypes.BLOB,
+        allowNull:true
     }
     
 },{
     sequelize,
-    modelName:'Users'
+    modelName:'Users',
+    timestamps: true
 })
 
 module.exports = User;

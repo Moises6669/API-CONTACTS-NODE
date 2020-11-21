@@ -40,6 +40,8 @@ app.get('/', (req, res) => {
      }).then(user => res.json(user));
 })
 
+app.use(require('./routes/api.routes'));
+
 //Static files
 app.use(express.static(path.join(__dirname, 'public')));
 

@@ -1,12 +1,13 @@
 const {Model,DataTypes} = require('sequelize');
 const sequelize = require('../database');
+ 
 
 class User extends Model {}
 
 User.init({
     name:{
         type: DataTypes.STRING,
-        allowNull:false,     
+        allowNull:[false,'es nesesario un name'],     
     },
     email:{
         type: DataTypes.STRING,
@@ -20,6 +21,11 @@ User.init({
     img:{
         type: DataTypes.STRING,
         allowNull:true
+    },
+    estado:{
+        type:DataTypes.BOOLEAN,
+        allowNull:false,
+        defaultValue:true,
     }
     
 },{
@@ -27,5 +33,13 @@ User.init({
     modelName:'Users',
     timestamps: true
 })
+
+//method to not return the password
+User.prototype.toJSON = function () {
+    let values = Object.assign({}, this.get());
+     delete values.password;
+     return values;
+}
+
 
 module.exports = User;

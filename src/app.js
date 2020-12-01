@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(process.env.PORT || 4000, () => {
     console.log('Server on PORT 4000');
     // connection to the database
-    sequelize.sync({ force: false }).then(() => {
+    sequelize.sync({ force: true}).then(() => {
         console.log('connected database');
     }).catch((err) => {
         console.log('An error has occurred', err);

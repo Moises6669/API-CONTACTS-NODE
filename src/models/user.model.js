@@ -1,18 +1,31 @@
 const {Model,DataTypes} = require('sequelize');
 const sequelize = require('../database');
- 
-
+const Contact = require('./contact.model');
 class User extends Model {}
 
 User.init({
     name:{
         type: DataTypes.STRING,
-        allowNull:[false,'es nesesario un name'],     
+        allowNull:false,
+        validate:{
+            notNull:{
+                msg:'The field cannot be null'
+            },
+            len:{
+                args:[3,255],
+                msg:'The name must be between 3 and 255 characters'
+            }
+        }     
     },
     email:{
         type: DataTypes.STRING,
         allowNull:false,
-        unique:true
+        validate:{
+            isEmail:{
+                args:true,
+                msg:'The field has to be a valid email'
+            }
+        }
     },
     password:{
         type:DataTypes.STRING,
@@ -41,5 +54,7 @@ User.prototype.toJSON = function () {
      return values;
 }
 
+User.hasMany(Contact,{as:'contactos',foreignKey:'userId'});
+Contact.belongsTo(User,{as:'autorUser',foreignKey:'userId'})
 
 module.exports = User;

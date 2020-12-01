@@ -1,13 +1,19 @@
 const bcryp = require('bcrypt');
 const User = require('../models/user.model');
-const fs = require('fs');
-const helper = require('../helper/upload');
 const { json } = require('body-parser');
- 
+const helper = require('../helper/upload');
+const fs = require('fs');
+const Contact = require('../models/contact.model');
 
 
 exports.GetAllUsers = (req, res) => {
-    User.findAll().then(post => {
+    User.findAll({
+        include:[{
+            model: Contact,
+            as:'contactos',
+            attributes:['name']
+        }]
+    }).then(post => {
         res.json(post);
     })
 }
@@ -15,8 +21,8 @@ exports.GetAllUsers = (req, res) => {
 
 exports.GetOneUsers = (req, res) => {
     User.findOne({
-        where:{
-            id:req.params.id
+        where: {
+            id: req.params.id
         }
     }).then(post => {
         res.json(post);
@@ -63,13 +69,13 @@ exports.PutUpdateUsers = (req, res) => {
             email: body.email,
             password: bcryp.hashSync(body.password, 10),
             img: req.file.filename
-        },{
-            where:{
-                id:req.params.id
+        }, {
+            where: {
+                id: req.params.id
             }
         }).then(data => {
-            res.json({'data': data.dataValues})
-          })
+            res.json({ 'data': data.dataValues })
+        })
     });
 
 }
@@ -78,10 +84,55 @@ exports.PutUpdateUsers = (req, res) => {
 exports.DeleteUsers = (req, res) => {
 
     User.destroy({
-        where:{
+        where: {
             id: req.params.id
         }
     }).then(data => {
-        res.json({'status': 'success', 'data': data.dataValues})
-      })
+        res.json({ 'status': 'success', 'data': data.dataValues })
+    })
+}
+
+exports.DeleteImgUser = (req, res) => {
+
+    let id = req.params.id;
+
+    try {
+
+        User.update({ img: null }, { where: { id: id } })
+            .then(user => {
+                res.json({
+                    ok: true,
+                    message: 'Image Delete',
+                    user
+                });
+            })
+            .catch(err => {
+                res.status(500).json({
+                    ok: false,
+                    message: err
+                });
+            })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.UpdateImgUser = (req, res) => {
+    const file = global.appRoot + '/images/' + req.file.filename;
+
+    fs.rename(req.file.path, file, _ => {
+        User.update({
+            img: req.file.filename
+        }, {
+            where: {
+                id: -req.params.id
+            }
+        }).then(post => {
+            res.status(200).json({
+                ok:true,
+                message:'successful update user image',
+                post
+            });
+        });
+    });
 }

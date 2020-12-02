@@ -8,10 +8,10 @@ const Contact = require('../models/contact.model');
 
 exports.GetAllUsers = (req, res) => {
     User.findAll({
-        include:[{
+        include: [{
             model: Contact,
-            as:'contactos',
-            attributes:['name']
+            as: 'contactos',
+            attributes: ['name', 'number']
         }]
     }).then(post => {
         res.json(post);
@@ -43,7 +43,7 @@ exports.PostCreateUsers = (req, res) => {
                 password: bcryp.hashSync(body.password, 10),
                 img: req.file.filename
             }).then(post => {
-                res.json({
+                res.status(201).json({
                     ok: true,
                     post
                 });
@@ -51,11 +51,12 @@ exports.PostCreateUsers = (req, res) => {
 
         });
     } catch (err) {
-        res.status(400), json({
+        res.status(500), json({
             ok: false,
             message: err
         });
     }
+
 }
 
 
@@ -74,7 +75,7 @@ exports.PutUpdateUsers = (req, res) => {
                 id: req.params.id
             }
         }).then(data => {
-            res.json({ 'data': data.dataValues })
+            res.status(204).json({ 'data': data.dataValues })
         })
     });
 
@@ -88,7 +89,7 @@ exports.DeleteUsers = (req, res) => {
             id: req.params.id
         }
     }).then(data => {
-        res.json({ 'status': 'success', 'data': data.dataValues })
+        res.status(204).json({ 'status': 'success', 'data': data.dataValues })
     })
 }
 
@@ -113,7 +114,10 @@ exports.DeleteImgUser = (req, res) => {
                 });
             })
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            ok: false,
+            message: err
+        })
     }
 }
 
@@ -125,12 +129,12 @@ exports.UpdateImgUser = (req, res) => {
             img: req.file.filename
         }, {
             where: {
-                id: -req.params.id
+                id: req.params.id
             }
         }).then(post => {
-            res.status(200).json({
-                ok:true,
-                message:'successful update user image',
+            res.status(204).json({
+                ok: true,
+                message: 'successful update user image',
                 post
             });
         });

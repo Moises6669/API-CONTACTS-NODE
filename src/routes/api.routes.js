@@ -2,7 +2,7 @@ const { Router } = require('express');
 const app = Router();
 const routes = require('../controllers/api.controllers');
 const upload = require('../helper/upload');
-
+const routeContacts = require('../controllers/api.contact');
 //User Routes
 app.get('/api/user', routes.GetAllUsers);
 
@@ -20,7 +20,16 @@ app.delete ('/api/user_img/:id',routes.DeleteImgUser);
 app.put('/api/user_img/:id',upload.single('file'),routes.UpdateImgUser);
 
 //Contact routes
+app.get('/api/contact',routeContacts.getAllContacts);
 
+app.get('/api/contact/:id',routeContacts.getOneContacts);
 
+app.post('/api/contact',routeContacts.PostNewContact);
+
+app.post('/api/contact/:id',routeContacts.PostContactId);
+
+app.put('/api/contact/:id',routeContacts.PutContact);
+
+app.delete('/api/contact/:id',routeContacts.DeleteContact);
 
 module.exports = app;

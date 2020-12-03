@@ -4,8 +4,6 @@ const { json } = require('body-parser');
 const helper = require('../helper/upload');
 const fs = require('fs');
 const Contact = require('../models/contact.model');
-
-
 exports.GetAllUsers = (req, res) => {
     User.findAll({
         include: [{
@@ -31,7 +29,6 @@ exports.GetOneUsers = (req, res) => {
 
 
 exports.PostCreateUsers = (req, res) => {
-
     const body = req.body;
     const file = global.appRoot + '/uploads/' + req.file.filename;
 
@@ -48,6 +45,7 @@ exports.PostCreateUsers = (req, res) => {
                     post
                 });
             })
+
 
         });
     } catch (err) {

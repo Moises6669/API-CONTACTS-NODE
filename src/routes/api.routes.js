@@ -1,8 +1,11 @@
 const { Router } = require('express');
 const app = Router();
-const routes = require('../controllers/api.controllers');
 const upload = require('../helper/upload');
-const routeContacts = require('../controllers/api.contact');
+
+//controllers
+const routes = require('../controllers/API/api.controllers');
+const routeContacts = require('../controllers/API/api.contact');
+const routeLogin = require('../controllers/API/api.login');
 
 //Validationes
 const {userValidationRules,validate} = require('../middlewares/user.validation')
@@ -35,6 +38,9 @@ app.post('/api/contact/:id', routeContacts.PostContactId);
 app.put('/api/contact/:id', routeContacts.PutContact);
 
 app.delete('/api/contact/:id', routeContacts.DeleteContact);
+
+//Login 
+app.post('/api/login',routeLogin.LoginUserPost);
 
 module.exports = app;
 

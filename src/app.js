@@ -1,5 +1,6 @@
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
@@ -28,6 +29,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+app.use(passport.initialize());
+app.use(passport.session());
 dotenv.config();
 
 

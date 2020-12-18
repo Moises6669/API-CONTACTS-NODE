@@ -30,7 +30,4 @@ Contact.init({
     modelName: "Contacts",
     timestamps: true
 });
-
-// Contact.belongsTo(User,{foreignKey:'userId'})
-// Contact.belongsTo(User)
 module.exports = Contact;

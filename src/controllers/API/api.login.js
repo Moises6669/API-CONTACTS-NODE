@@ -1,19 +1,5 @@
 const Users = require('../../models/user.model');
 const bcrypt = require('bcrypt');
-const passport = require('passport');
-const { emit } = require('nodemon');
-
-
-///Todavia no se valida bien 
-const correctPassword = (enteredPassword, originalPassord) => {
-    return new Promise(resolve => {
-        bcrypt.compare(enteredPassword, originalPassord, (err, res) => {
-            resolve(res)
-        });
-    })
-}
-
-
 
 exports.LoginUserPost = (req, res) => {
     if (!req.body.email || !req.body.password) {

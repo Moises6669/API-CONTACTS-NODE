@@ -1,7 +1,6 @@
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const express = require("express");
-const morgan = require("morgan");
 const dotenv = require("dotenv");
 const path = require("path");
 
@@ -17,7 +16,6 @@ require("./config/index.config");
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(morgan("dev"));
 app.use(passport.initialize());
 app.use(passport.session());
 dotenv.config();

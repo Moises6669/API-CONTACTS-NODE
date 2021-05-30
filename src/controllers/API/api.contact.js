@@ -53,27 +53,6 @@ exports.getOneContacts = (req, res) => {
 }
 
 
-
-exports.PostNewContact = (req, res) => {
-    let body = req.body;
-
-    Contact.create({
-        name: body.name,
-        number: body.number
-    }).then(result => {
-        res.status(201).json({
-            ok: true,
-            message: 'successful',
-            result
-        });
-    }).catch(err => {
-        res.status(500).json({
-            ok: false,
-            message: err
-        });
-    });
-}
-
 exports.PostContactId = (req, res) => {
     let body = req.body;
     let id = req.params.id;

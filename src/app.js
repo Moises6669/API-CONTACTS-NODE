@@ -17,7 +17,7 @@ require("./config/index.config");
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 app.use(passport.initialize());
 app.use(passport.session());
 dotenv.config();

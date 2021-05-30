@@ -14,9 +14,6 @@ const sequelize = require('./database');
 //env settings
 require('./config/index.config');
 
-//Settings
-app.set('views', path.join(__dirname,'views'))
-
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

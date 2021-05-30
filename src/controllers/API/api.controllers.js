@@ -31,31 +31,32 @@ exports.GetOneUsers = (req, res) => {
 
 exports.PostCreateUsers = (req, res) => {
   const body = req.body;
-  const file = global.appRoot + "/uploads/" + req.file.uri;
+  const file = global.appRoot + '/uploads/' + req.file.filename;
 
   try {
-    fs.rename(req.file.uri, file, (err) => {
-      User.create({
-        name: body.name,
-        email: body.email,
-        password: bcryp.hashSync(body.password, 10),
-        img: req.file.uri,
-      }).then((post) => {
-        res.status(201).json({
-          ok: true,
-          post,
-        });
+      fs.rename(req.file.path, file, (err) => {
+          User.create({
+              name: body.name,
+              email: body.email,
+              password: bcryp.hashSync(body.password, 10),
+              img: req.file.filename
+          }).then(post => {
+              res.status(201).json({
+                  ok: true,
+                  post
+              });
+          })
+
+
       });
-    });
   } catch (err) {
-    res.status(500),
-      json({
-        ok: false,
-        message: err,
+      res.status(500), json({
+          ok: false,
+          message: err
       });
   }
-};
 
+}
 exports.PutUpdateUsers = (req, res) => {
   const body = req.body;
   const file = global.appRoot + "/uploads/" + req.file.filename;

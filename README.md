@@ -1,25 +1,80 @@
-# API-CONTACTS-NODE
-API that allows a CRUD with users plus uploading of images as a profile photo
+# API Phonebook
 
-#API-GET-USUARIO
+### initialize project
+```
+npm install
+```
+### create the database before initializing the server
+```
+create database CONTACTOS;
+```
+---
+### change the variables environment in /config/index.config.js
 
-![API-GET-USUARIOS](https://user-images.githubusercontent.com/66188523/102650249-364a3280-4130-11eb-9ba5-78a0ff1453b2.png)
+```
+process.env.PASSWORD = 'your_password';
+```
+```
+process.env.USERNAME = 'your_username';
+```
 
+### What was used on this project
+- Nodejs
+- Express
+- Mysql
+- Postman
 
-+---------+-----------------------------------------------+----------------------------------------+
-| Método  | URI                                           | Acción                                 |
-+---------+-----------------------------------------------+----------------------------------------+
-|GET      |/api/user                                      | routes.GetAllUsers                     |
-|GET      |/api/user/:id                                  | routes.GetOneUsers                     |
-|POST     |/api/user                                      | routes.PostCreateUsers                 |
-|PUT      |/api/user/:id                                  | routes.PutUpdateUsers                  |
-|DELETE   |/api/user/:id                                  | routes.DeleteUsers            	       |
-|DELETE   |/api/user_img/:id                              | routes.DeleteImgUser          	       |
-|PUT      |/api/user_img/:id                              | routes.UpdateImgUser                   |
-|GET      |/api/contact              			          | routeContacts.getAllContacts           |
-|GET      |/api/contact/:id                 		      | routeContacts.getOneContacts           | 
-|POST     |/api/contact/:id_user			              | routeContacts.PostContactId	           |  
-|PUT      |/api/contact/:id_user     		              | routeContacts.PutContact		       |
-|DELETE   |/api/contact/:id_user         		          | routeContacts.DeleteContact       	   |
-|POST     |/api/login                                     | routeLogin.LoginUserPost               |
-+---------+-----------------------------------------------+----------------------------------------+	
+This is the list of endpoints currently available:
+ 
+<table>
+    <thead>
+      <tr>
+        <th>Verb</th><th>Resource</th><th>Description</th> 
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GET</td><td>/api/user</td><td>routes.GetAllUsers</td> 
+      </tr>
+      <tr>
+        <td>GET</td><td>/api/user/:id</td><td>routes.GetOneUser</td> 
+      </tr>
+      <tr>
+        <td>POST</td><td>/api/user</td><td>routes.PostCreateUsers</td> 
+      </tr>
+      <tr>
+        <td>PUT</td><td>/api/user/:id</td><td>routes.PutUpdateUsers</td> 
+      </tr>
+      <tr>
+        <td>DELETE</td><td>/api/user/:id</td><td>routes.DeleteUsers</td> 
+      </tr>
+      <tr>
+        <td>DELETE</td><td>/api/user_img/:id</td><td>routes.DeleteImgUser</td> 
+      </tr>
+      <tr>
+        <td>PUT</td><td>/api/user_img/:id</td><td>routes.UpdateImgUser</td> 
+      </tr>
+      <tr>
+        <td>GET</td><td>/api/contact</td><td>routeContacts.getAllContacts</td> 
+      </tr>
+      <tr>
+        <td>GET</td><td>/api/contact/:id</td><td>routeContacts.getOneContacts</td> 
+      </tr>
+      <tr>
+        <td>POST</td><td>/api/contact/:id_user</td><td>routeContacts.PostContactId</td> 
+      </tr>
+      <tr>
+        <td>PUT</td><td>/api/contact/:id_user</td><td>routeContacts.PutContact</td> 
+      </tr>
+      <tr>
+        <td>DELETE</td><td>/api/contact/:id_user</td><td>routeContacts.DeleteContact</td> 
+      </tr>
+        <td>POST</td><td>/api/login</td><td>routeLogin.LoginUserPost </td> 
+      </tr> 
+    </tbody>
+  </table>
+  
+  ### How to create a user in Postman:
+  
+  ![new user ](https://user-images.githubusercontent.com/66188523/120088736-fc069900-c0b0-11eb-8ae0-363478ad8208.jpg)
+  

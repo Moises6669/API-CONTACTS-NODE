@@ -42,7 +42,7 @@ exports.PostCreateUsers = (req, res) => {
                 password: bcryp.hashSync(body.password, 10),
                 img: req.file.filename
             }).then(post => {
-                res.status(201).json({
+                res.json({
                     ok: true,
                     post
                 });
@@ -51,7 +51,7 @@ exports.PostCreateUsers = (req, res) => {
 
         });
     } catch (err) {
-        res.status(500), json({
+        res.json({
             ok: false,
             message: err
         });

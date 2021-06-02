@@ -7,15 +7,15 @@ const userValidationRules = () => {
       .trim()
       .isLength({ min: 3, max: 30 })
       .withMessage(
-        " Name should not be empty, should be more than one and less than 30 character"
+        "El nombre de usuario no puede estar vacio"
       ),
 
-    body("password", "the password is required")
+    body("password", "Se require la contraseña")
       .isLength({ min: 5 })
       .notEmpty()
-      .withMessage("the password must be greater than 5 characters"),
+      .withMessage("La contraseña debe de tener como minimo 5 letras"),
 
-    body("email", "Your email is not valid").notEmpty().isEmail(),
+    body("email", "El correo electronico es requerido").notEmpty().isEmail(),
   ];
 };
 

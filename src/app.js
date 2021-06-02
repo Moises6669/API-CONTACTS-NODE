@@ -1,16 +1,16 @@
 const bodyParser = require("body-parser");
-const passport = require("passport");
 const express = require("express");
+const passport = require("passport");
 const dotenv = require("dotenv");
 const path = require("path");
 
-//initialization
+//Inicialización
 const app = express();
 
-//Database
+//Conexion con la base de datos
 const sequelize = require("./database");
 
-//env settings
+//Variables de entorno -> Configuraciones
 require("./config/index.config");
 
 //Middlewares
@@ -20,15 +20,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 dotenv.config();
 
-app.use(require("./routes/api.routes"));
+app.use("/api", require("./routes/api.routes"));
 
 //global variables
 global.appRoot = __dirname;
 
-//Static files
+//Archivos estaticos
 app.use(express.static(path.join(__dirname, "public")));
 
-//Server
+//Escuchando al server
 app.listen(process.env.PORT, () => {
   console.log("Servidor iniciado en el puerto ", process.env.PORT);
   // connection to the database

@@ -10,11 +10,11 @@ User.init(
       allowNull: false,
       validate: {
         notNull: {
-          msg: "The field cannot be null",
+          msg: "El nombre de usuario es requerido",
         },
         len: {
           args: [3, 255],
-          msg: "The name must be between 3 and 255 characters",
+          msg: "El nombre de usuario debe tener como minimo 3 letras",
         },
       },
     },
@@ -24,16 +24,16 @@ User.init(
       validate: {
         isEmail: {
           args: true,
-          msg: "The field has to be a valid email",
+          msg: "El correo electronico es requerido",
         },
         notEmpty: {
           args: true,
-          msg: "Email-id required",
+          msg: "El correo electronico es requerido",
         },
       },
       unique: {
         args: true,
-        msg: "Email address already in use!",
+        msg: "Ya existe una cuenta con este correo electronico",
       },
     },
     password: {

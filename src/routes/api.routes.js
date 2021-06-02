@@ -4,43 +4,48 @@ const app = Router();
 const upload = require('../helper/upload');
 
 //controllers
-const routes = require('../controllers/API/api.controllers');
-const routeContacts = require('../controllers/API/api.contact');
-const routeLogin = require('../controllers/API/api.login');
+const { GetAllUsers, GetOneUsers, PostCreateUsers, PutUpdateUsers, DeleteUsers, DeleteImgUser, UpdateImgUser } = require('../controllers/API/users.controllers');
+const { getAllContacts, getOneContacts, PostNewContact, PostContactId, PutContact, DeleteContact } = require('../controllers/API/contacts.controllers');
+const { LoginUserPost } = require('../controllers/API/login.controllers');
 
 //Validationes
-const {userValidationRules,validate} = require('../middlewares/user.validation')
+const { userValidationRules,validate } = require('../middlewares/user.validation')
 
-//User Routes
-app.get('/api/user',routes.GetAllUsers);
+//Traer todos los usuarios
+app.get('/user', GetAllUsers);
 
-app.get('/api/user/:id', routes.GetOneUsers);
+//Traer un usuario
+app.get('/user/:id', GetOneUsers);
 
-app.post('/api/user',upload.single('file'),[userValidationRules(),validate], routes.PostCreateUsers);
+//Crear un usuario
+app.post('/user',upload.single('file'),[userValidationRules(),validate], PostCreateUsers);
 
-app.put('/api/user/:id', upload.single('file'), routes.PutUpdateUsers);
+//Actualizar un usuario
+app.put('/user/:id', upload.single('file'), PutUpdateUsers);
 
-app.delete('/api/user/:id', routes.DeleteUsers);
+//Eliminar un usuario
+app.delete('/user/:id', DeleteUsers);
 
-//Image Routes
-app.delete('/api/user_img/:id', routes.DeleteImgUser);
+//Eliminar imagen de usuario
+app.delete('/user_img/:id', DeleteImgUser);
 
-app.put('/api/user_img/:id', upload.single('file'), routes.UpdateImgUser);
+//Actualizar imagen de usuario
+app.put('/user_img/:id', upload.single('file'), UpdateImgUser);
 
 //Contact routes
-app.get('/api/contact', routeContacts.getAllContacts);
+app.get('/contact', getAllContacts);
 
-app.get('/api/contact/:id', routeContacts.getOneContacts);
+app.get('/contact/:id', getOneContacts);
 
-app.post('/api/contact', routeContacts.PostNewContact);
+app.post('/contact', PostNewContact);
 
-app.post('/api/contact/:id', routeContacts.PostContactId);
+app.post('/contact/:id', PostContactId);
 
-app.put('/api/contact/:id', routeContacts.PutContact);
+app.put('/contact/:id', PutContact);
 
-app.delete('/api/contact/:id', routeContacts.DeleteContact);
+app.delete('/contact/:id', DeleteContact);
 
 //Login 
-app.post('/api/login',routeLogin.LoginUserPost);
+app.post('/login', LoginUserPost);
 
 module.exports = app;

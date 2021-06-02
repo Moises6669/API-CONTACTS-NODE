@@ -7,3 +7,5 @@ process.env.USERNAME = 'uoanjs5ogdrsilmo';
 process.env.PASSWORD = 'rHBKCOxPcIUeuN9vxQId';
 
 process.env.DATABASE = 'bl43zms6b77ogo59tjoa';
+
+process.env.SECRET = 'miclavesecretauwu';

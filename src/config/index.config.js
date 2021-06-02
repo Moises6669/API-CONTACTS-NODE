@@ -1,9 +1,11 @@
-process.env.PORT = process.env.PORT || 4000;
+process.env.PORT = process.env.PORT || 3306;
 
-process.env.HOST = process.env.HOST || 'localhost';
+process.env.HOST = process.env.HOST || 'bl43zms6b77ogo59tjoa-mysql.services.clever-cloud.com';
 
-process.env.USERNAME = 'root';
+process.env.USERNAME = 'uoanjs5ogdrsilmo';
 
-process.env.PASSWORD = 'moises';
+process.env.PASSWORD = 'rHBKCOxPcIUeuN9vxQId';
 
-process.env.DATABASE = 'contactos';
+process.env.DATABASE = 'bl43zms6b77ogo59tjoa';
+
+process.env.SECRET = 'miclavesecretauwu';

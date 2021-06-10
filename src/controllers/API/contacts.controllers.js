@@ -16,6 +16,28 @@ exports.getAllContacts = (req, res) => {
   });
 };
 
+exports.getContactsUser = (req, res) => {
+  const { id } = req.params;
+
+  Contact.findAll({
+    where: {
+      userId: id,
+    },
+  }).then((post) => {
+    if (post.length > 0) {
+      return res.json({
+        ok: true,
+        contacts: post,
+      });
+    } else {
+      return res.json({
+        ok: false,
+        message: "Aun no tienes contactos",
+      });
+    }
+  });
+};
+
 exports.getOneContacts = (req, res) => {
   let id = req.params.id;
 

@@ -5,7 +5,7 @@ const upload = require('../helper/upload');
 
 //controllers
 const { GetAllUsers, GetOneUsers, PostCreateUsers, PutUpdateUsers, DeleteUsers, DeleteImgUser, UpdateImgUser } = require('../controllers/API/users.controllers');
-const { getAllContacts, getOneContacts, PostNewContact, PostContactId, PutContact, DeleteContact } = require('../controllers/API/contacts.controllers');
+const { getAllContacts, getOneContacts, PostNewContact, PostContactId, PutContact, DeleteContact, getContactsUser } = require('../controllers/API/contacts.controllers');
 const { LoginUserPost } = require('../controllers/API/login.controllers');
 
 //Validationes
@@ -36,6 +36,8 @@ app.put('/user_img/:id', upload.single('file'), UpdateImgUser);
 app.get('/contact', getAllContacts);
 
 app.get('/contact/:id', getOneContacts);
+
+app.get('/contacts/:id', getContactsUser);
 
 app.post('/contact', PostNewContact);
 

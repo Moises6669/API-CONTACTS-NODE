@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../database");
+const sequelize = require("../database/mysql.connection");
 const Contact = require("./contact.model");
 class User extends Model {}
 
@@ -57,7 +57,6 @@ User.init(
   }
 );
 
-//method to not return the password
 User.prototype.toJSON = function () {
   let values = Object.assign({}, this.get());
   delete values.password;

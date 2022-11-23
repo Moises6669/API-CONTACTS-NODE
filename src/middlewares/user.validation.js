@@ -7,24 +7,24 @@ const userValidationRules = () => {
       .trim()
       .isLength({ min: 3, max: 30 })
       .withMessage(
-        "El nombre de usuario no puede estar vacio"
+        "Username cannot be empty"
       ),
 
-    body("password", "Se require la contraseña")
+    body("password", "Password required")
       .isLength({ min: 5 })
       .notEmpty()
-      .withMessage("La contraseña debe de tener como minimo 5 letras"),
+      .withMessage("The password must be at least 5 letters long"),
 
-    body("email", "El correo electronico es requerido").notEmpty().isEmail(),
+    body("email", "E-mail is required").notEmpty().isEmail(),
   ];
 };
 
 const validate = (req, res, next) => {
   const errors = validationResult(req);
-  if (errors.isEmpty()) {
-    return next();
-  }
+  if (errors.isEmpty())return next();
+
   const extractedErrors = [];
+  
   errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }));
 
   return res.status(422).json({

@@ -22,7 +22,7 @@ const upload = multer({
             return cb(null, true);
         }
 
-        cb("error: Archivo debe ser una imagen valida");
+        cb("error: File must be a valid image");
     }
 });
 

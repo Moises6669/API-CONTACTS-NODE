@@ -1,5 +1,7 @@
-const databaseConfig = require("./database.config");
+const {sequelize} = require("./database.config");
+const port = require("./app.keys");
 
 module.exports = {
-     databaseConfig
-}
+  sequelize,
+  port,
+};

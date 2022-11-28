@@ -50,4 +50,8 @@ app.delete('/contact/:id', DeleteContact);
 //Login 
 app.post('/login', LoginUserPost);
 
+app.get("/help",(req,res)=>{
+     res.send("hello")
+})
+
 module.exports = app;

@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+const {Sequelize} = require("sequelize");
 const databaseSetup = require("./database.keys");
 
 const sequelize = new Sequelize({
@@ -10,4 +10,4 @@ const sequelize = new Sequelize({
      logging: databaseSetup.logging
 });
 
-module.exports = sequelize;
+module.exports = {sequelize};
